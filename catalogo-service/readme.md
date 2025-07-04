@@ -1,83 +1,73 @@
-# catalogo-service/
-
-Este directorio contiene el microservicio de **Catálogo** del proyecto *MasterBikes*. Este servicio es responsable de gestionar la información de bicicletas, componentes y accesorios ofrecidos, tanto para la fabricación personalizada como para el arriendo o venta de modelos predefinidos.
-
----
-
-## 📁 Contenido
-
-El microservicio está estructurado siguiendo los principios de **Spring Boot** para aplicaciones RESTful.
+<div align="center">
+  <img src="../frontend/images/logo.svg" alt="MasterBikes" width="120"/>
+  <h1>📦 Catálogo Service - MasterBikes</h1>
+  <h3>Gestión de productos y personalización</h3>
+  <p><b>Spring Boot · REST · Sello MasterBikes</b></p>
+</div>
 
 ---
+## Estructura de directorios
 
-### 1. Clases de Modelo  
-📂 `src/main/java/masterbikes/catalogo_service/model/`
+```
+catalogo-service/
+├── pom.xml
+├── readme.md
+├── src/
+│   ├── main/
+│   │   ├── java/masterbikes/catalogo_service/
+│   │   │   ├── model/
+│   │   │   ├── dto/
+│   │   │   ├── repository/
+│   │   │   ├── service/
+│   │   │   └── controller/
+│   │   └── resources/
+│   │       └── application.properties
+│   └── test/
+│       └── java/masterbikes/catalogo_service/
+└── target/
+```
 
-Definen la estructura de los datos persistidos en la base de datos:
+# catalogo-service (Microservicio de Catálogo)
 
-- **`Accesorio.java`**: Representa un accesorio para bicicletas. Contiene modelo, categoría, marca, descripción, talla, tipo de uso y precio unitario.
+Microservicio REST para la gestión de bicicletas, componentes y accesorios. Permite listar, filtrar y crear productos, así como la personalización de bicicletas.
 
-- **`Bicicleta.java`**: Entidad principal. Puede representar bicicletas personalizadas (con `idCliente`, `tallaUsuario` y componentes específicos) o modelos predefinidos. Incluye referencias a `marco`, `rueda`, `freno`, `manubrio`, `sillín`.
+## Estado actual
 
-- **`Componente.java`**: Representa una parte individual de la bicicleta. Atributos: tipo, marca, modelo, diámetro de rueda, tipo de freno, tipo de uso, talla, precio unitario.
+- Endpoints REST funcionales para catálogo, componentes y accesorios.
+- Integración con frontend y otros microservicios vía API Gateway.
+- Puerto por defecto: `8082`.
 
----
+## Endpoints principales
 
-### 2. DTOs  
-📂 `src/main/java/masterbikes/catalogo_service/dto/`
+| Método | Ruta                                 | Descripción                        |
+|--------|--------------------------------------|------------------------------------|
+| GET    | /api/v1/catalogo/bicicletas          | Listar bicicletas                  |
+| POST   | /api/v1/catalogo/bicicletas          | Crear bicicleta personalizada      |
+| GET    | /api/v1/catalogo/componentes         | Listar componentes                 |
+| GET    | /api/v1/catalogo/accesorios          | Listar accesorios                  |
 
-Objetos de Transferencia de Datos para simplificar estructuras de datos entre capas:
+## Lógica de negocio
 
-- **`BicicletaDTO.java`**: Facilita la creación o actualización de bicicletas usando IDs de componentes y datos del cliente.
+- Gestión de productos y componentes.
+- Validación de compatibilidad para personalización.
+- Integración con inventario y ventas.
 
----
+## Cómo levantar
 
-### 3. Repositorios  
-📂 `src/main/java/masterbikes/catalogo_service/repository/`
+1. Java 17 y Maven instalados.
+2. Base de datos MySQL configurada (`masterbikes_catalogo_01v`).
+3. Ejecuta:
+   ```bash
+   ./mvnw spring-boot:run
+   ```
 
-Interfaces que extienden `JpaRepository` para operaciones con base de datos:
+## Próximos pasos
 
-- **`AccesorioRepository.java`**
-- **`BicicletaRepository.java`**: Incluye métodos personalizados para buscar bicicletas por modelo, cliente o tipo.
-- **`ComponenteRepository.java`**
-
----
-
-### 4. Servicios  
-📂 `src/main/java/masterbikes/catalogo_service/service/`
-
-Contienen la lógica de negocio:
-
-- **`AccesorioService.java`**: Gestión de accesorios (listar, guardar, buscar, eliminar).
-- **`BicicletaService.java`**: Lógica de compatibilidad entre componentes al guardar una bicicleta. Permite crear bicicletas desde un DTO.
-- **`ComponenteService.java`**: Operaciones sobre componentes.
-- **`ValidadorCompatibilidad.java`**: Clase utilitaria para validar compatibilidad entre componentes (ej. marco con rueda/freno).
-
----
-
-### 5. Controladores  
-📂 `src/main/java/masterbikes/catalogo_service/controller/`
-
-Manejan solicitudes HTTP entrantes:
-
-- **`AccesorioController.java`** → `/api/v1/catalogo/accesorios`
-- **`BicicletaController.java`** → `/api/v1/catalogo/bicicletas`
-- **`ComponenteController.java`** → `/api/v1/catalogo/componentes`
-
----
-
-### 6. Configuración Principal
-
-- **`CatalogoServiceApplication.java`**: Clase principal que inicializa la aplicación Spring Boot.
-- **`application.properties`**:
-  - Nombre de la aplicación: `catalogo-service`
-  - Puerto: `8082`
-  - Configuración de base de datos MySQL (URL, usuario, contraseña, dialecto Hibernate)
+- Mejorar documentación de endpoints y ejemplos de requests/responses.
+- Consistencia en validaciones y respuestas de error.
 
 ---
-
-### 7. Pruebas  
-📂 `src/test/java/masterbikes/catalogo_service/`
+*Verifica el puerto y la configuración en `application.properties`.*
 
 - **`CatalogoServiceApplicationTests.java`**: Verifica que el contexto Spring Boot se cargue correctamente.
 

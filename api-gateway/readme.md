@@ -1,71 +1,67 @@
-# api-gateway/
-
-Esta carpeta contiene el código fuente y la configuración del **API Gateway** del proyecto *MasterBikes*. El API Gateway es una pieza fundamental de la arquitectura de microservicios, encargada de enrutar las solicitudes de los clientes a los servicios internos correspondientes y de manejar aspectos transversales como la seguridad y la configuración de CORS.
-
----
-
-## 📁 Contenido
-
-### `pom.xml`
-Archivo de configuración de Maven para el proyecto. Define:
-
-- Las dependencias (Spring Cloud Gateway, Spring Boot).
-- La versión de Java (17).
-- Los plugins de construcción.
-
-Es crucial para gestionar las librerías y el ciclo de vida del proyecto.
+<div align="center">
+  <img src="../frontend/images/logo.svg" alt="MasterBikes" width="120"/>
+  <h1>🚦 API Gateway - MasterBikes</h1>
+  <h3>Enrutamiento, seguridad y acceso centralizado</h3>
+  <p><b>Spring Cloud Gateway · Seguridad · CORS · Sello MasterBikes</b></p>
+</div>
 
 ---
+## Estructura de directorios
 
-### `src/main/java/masterbikes/api_gateway/`
+```
+api-gateway/
+├── pom.xml
+├── readme.md
+├── mvnw / mvnw.cmd
+├── src/
+│   ├── main/
+│   │   ├── java/masterbikes/api_gateway/
+│   │   │   ├── ApiGatewayApplication.java
+│   │   │   └── (otras clases de configuración)
+│   │   └── resources/
+│   │       └── application.properties
+│   └── test/
+│       └── java/masterbikes/api_gateway/
+└── target/
+```
 
-- **`ApiGatewayApplication.java`**: Clase principal que inicia la aplicación Spring Boot para el API Gateway.
+# API Gateway - MasterBikes
 
-- **`CorsConfig.java`**: Configuración de CORS (Cross-Origin Resource Sharing) que permite la comunicación entre el frontend (por ejemplo, `http://localhost:3000`) y los servicios del backend.  
-  Actualmente está comentada, lo que sugiere que la configuración de CORS se maneja a través de `application.properties`.
+El API Gateway es el punto de entrada único para el frontend y clientes externos. Centraliza el enrutamiento, CORS y la seguridad, y expone los endpoints REST de los microservicios.
+
+## Estado actual
+
+- Enrutamiento funcional a todos los microservicios (catálogo, inventario, sucursal, venta).
+- CORS habilitado para el frontend.
+- Puerto por defecto: `8080`.
+
+## Endpoints expuestos
+
+| Método | Ruta Gateway                | Microservicio destino         | Descripción                       |
+|--------|----------------------------|-------------------------------|-----------------------------------|
+| GET    | /api/catalogo/bicicletas   | catalogo-service (8082)       | Listar bicicletas                 |
+| POST   | /api/catalogo/bicicletas   | catalogo-service (8082)       | Crear bicicleta personalizada     |
+| GET    | /api/inventario            | inventario-service (8084)     | Listar inventario                 |
+| POST   | /api/movimientosinventario | inventario-service (8084)     | Registrar movimiento de inventario|
+| GET    | /api/sucursales            | sucursal-service (8083/8084*) | Listar sucursales                 |
+| POST   | /api/ventas                | venta-service (8085)          | Registrar venta                   |
+| POST   | /api/auth/login            | auth-service (por definir)    | Login de usuario                  |
+| POST   | /api/auth/register         | auth-service (por definir)    | Registro de usuario               |
+
+## Cómo levantar
+
+1. Java 17 instalado.
+2. Microservicios levantados en sus puertos.
+3. Desde esta carpeta:
+   ```bash
+   ./mvnw spring-boot:run
+   ```
+
+## Próximos pasos
+
+- Mejorar manejo de errores y fallback.
+- Documentar ejemplos de requests/responses.
 
 ---
-
-### `src/main/resources/`
-
-- **`application.properties`**: Archivo de configuración principal de Spring Boot. Define:
-
-  - Puerto del servidor (`8080`).
-  - Nombre de la aplicación (`api-gateway`).
-  - Rutas de enrutamiento hacia los microservicios:
-    - `catalogo-service`: `http://localhost:8082`
-    - `inventario-service`: `http://localhost:8083`
-    - `sucursal-service`: `http://localhost:8084`
+*Verifica los puertos y rutas en `application.properties`.*
     - `venta-service`: `http://localhost:8085`
-  - Predicados de ruta (`/api/**`) y filtros (`StripPrefix`).
-  - Configuración global de CORS:
-    - Orígenes permitidos: `http://localhost:3000`
-    - Métodos HTTP permitidos y cabeceras.
-
----
-
-### `src/test/java/masterbikes/api_gateway/`
-
-- **`ApiGatewayApplicationTests.java`**: Clase de prueba generada automáticamente por Spring Boot para verificar que el contexto de la aplicación se carga correctamente.
-
----
-
-### `.mvn/wrapper/`
-
-- **`maven-wrapper.properties`**: Define la versión de Maven a usar (`3.9.10`) y la URL de descarga.  
-  Asegura que todos los desarrolladores usen la misma versión sin instalar Maven globalmente.
-
-- **`mvnw` / `mvnw.cmd`**: Scripts para ejecutar Maven usando el wrapper (Unix/Windows).
-
----
-
-## ▶️ Cómo Usar
-
-Para levantar el API Gateway:
-
-1. Asegúrate de tener **Java 17** instalado.
-2. Asegúrate de que los servicios de destino (Catálogo, Inventario, Sucursal, Venta) estén ejecutándose en los puertos `8082` a `8085`.
-
-### Opción 1: Ejecutar con Maven
-```bash
-./mvnw spring-boot:run

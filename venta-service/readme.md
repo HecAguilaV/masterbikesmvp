@@ -1,83 +1,72 @@
-# venta-service/ (Microservicio de Ventas y Facturación)
+<div align="center">
+  <img src="../frontend/images/logo.svg" alt="MasterBikes" width="120"/>
+  <h1>🧾 Venta Service - MasterBikes</h1>
+  <h3>Ventas y facturación</h3>
+  <p><b>Spring Boot · REST · Sello MasterBikes</b></p>
+</div>
 
-Esta carpeta contiene el **microservicio de Spring Boot** encargado de la gestión de ventas y la emisión de facturas para la aplicación MasterBikes. Este servicio orquesta el proceso de una venta, desde la creación del detalle de los productos vendidos hasta la generación de la factura correspondiente, interactuando con otros microservicios de la arquitectura.
+---
+## Estructura de directorios
 
-## Descripción General
+```
+venta-service/
+├── pom.xml
+├── readme.md
+├── src/
+│   ├── main/
+│   │   ├── java/masterbikes/venta_service/
+│   │   │   ├── model/
+│   │   │   ├── dto/
+│   │   │   ├── repository/
+│   │   │   ├── service/
+│   │   │   └── controller/
+│   │   └── resources/
+│   │       └── application.properties
+│   └── test/
+│       └── java/masterbikes/venta_service/
+└── target/
+```
 
-El `venta-service` es un componente clave en la arquitectura de microservicios de MasterBikes, proporcionando una API RESTful para:
+# venta-service (Microservicio de Ventas y Facturación)
 
-* Registrar nuevas ventas, incluyendo los productos (bicicletas y accesorios) y sus detalles.
-* Generar facturas y boletas asociadas a cada venta.
-* Consultar el historial de ventas y facturas.
-* Interactuar con el servicio de inventario para registrar el egreso de productos vendidos.
-* Obtener información de productos desde un servicio de catálogo.
+Microservicio REST para la gestión de ventas y facturación. Orquesta el proceso de venta, generación de factura y actualización de inventario, integrando catálogo e inventario.
 
-## Contenido
+## Estado actual
 
-* **`src/main/java/masterbikes/venta_service/`**: Contiene el código fuente principal del microservicio.
-    * **`controller/`**: Clases que exponen los endpoints REST.
-        * `FacturaController.java`: Maneja las operaciones de consulta de facturas.
-        * `VentaController.java`: Maneja las operaciones de creación, consulta y listado de ventas.
-    * **`dto/`**: Clases Data Transfer Object (DTO) para la comunicación con otros servicios.
-        * `InventarioDTO.java`: DTO para la información de inventario.
-        * `MovimientoInventarioDTO.java`: DTO para registrar movimientos de inventario.
-        * `ProductoBaseDTO.java`: DTO para la información base de un producto.
-    * **`model/`**: Clases que representan las entidades de la base de datos y la lógica de dominio.
-        * `DetalleVenta.java`: Entidad que representa un ítem dentro de una venta (producto, cantidad, precio unitario).
-        * `Factura.java`: Entidad que representa una factura o boleta, asociada a una venta, incluyendo detalles de IVA.
-        * `Venta.java`: Entidad principal que representa una venta, con fecha, cliente, sucursal, vendedor, total y lista de detalles.
-    * **`repository/`**: Interfaces para la interacción con la base de datos, utilizando Spring Data JPA.
-        * `DetalleVentaRepository.java`: Interfaz para operaciones de persistencia de `DetalleVenta`.
-        * `FacturaRepository.java`: Interfaz para operaciones de persistencia de `Factura`, incluyendo búsqueda por `ventaId`.
-        * `VentaRepository.java`: Interfaz para operaciones de persistencia de `Venta`.
-    * **`service/`**: Clases que contienen la lógica de negocio y orquestan las operaciones del repositorio y la comunicación entre servicios.
-        * `FacturaService.java`: Ofrece métodos para listar, guardar, buscar y eliminar facturas.
-        * `VentaService.java`: Contiene la lógica para generar una venta, calcular totales y registrar movimientos de inventario; se comunica con los servicios de catálogo e inventario.
-    * `VentaServiceApplication.java`: Clase principal que inicia la aplicación Spring Boot, incluyendo la configuración de `RestTemplate` para comunicación entre servicios.
-* **`src/test/java/masterbikes/venta_service/`**: Contiene las clases de prueba.
-    * `VentaServiceApplicationTests.java`: Clase principal para pruebas de contexto de Spring Boot.
-* **`src/main/resources/`**:
-    * `application.properties`: Archivo de configuración de la aplicación, incluyendo el puerto del servidor, los detalles de conexión a la base de datos MySQL y las URLs de otros microservicios (`catalogo-service` e `inventario-service`).
-* **`.mvn/wrapper/`**: Contiene los scripts y configuraciones para Maven Wrapper.
-    * `maven-wrapper.properties`: Configura la versión de Maven a usar para este proyecto.
-* **`pom.xml`**: Archivo de configuración del proyecto Maven, define las dependencias y plugins.
+- Endpoints REST funcionales para ventas y facturas.
+- Integración con catálogo, inventario y sucursales vía API Gateway.
+- Puerto por defecto: `8085`.
 
-## Funcionalidad
+## Endpoints principales
 
-Este microservicio proporciona las siguientes funcionalidades a través de su API REST:
+| Método | Ruta                        | Descripción                |
+|--------|-----------------------------|----------------------------|
+| GET    | /api/v1/ventas              | Listar ventas              |
+| POST   | /api/v1/ventas              | Registrar venta            |
+| GET    | /api/v1/facturas            | Listar facturas            |
 
-### Endpoints de Ventas (`/api/v1/ventas`)
+## Lógica de negocio
 
-* `GET /api/v1/ventas`: Obtiene una lista de todas las ventas registradas.
-* `GET /api/v1/ventas/{id}`: Obtiene los detalles de una venta específica por su ID.
-* `POST /api/v1/ventas`: Permite crear una nueva venta. Este endpoint orquesta la generación de la venta, el cálculo del total, la interacción con el servicio de inventario para el egreso de productos y la creación de la factura.
+- Orquestación de venta y generación de factura.
+- Actualización de inventario tras venta.
+- Integración con catálogo e inventario.
 
-### Endpoints de Facturas (`/api/v1/facturas`)
+## Cómo levantar
 
-* `GET /api/v1/facturas`: Lista todas las facturas generadas.
-* `GET /api/v1/facturas/{id}`: Busca una factura por su ID.
+1. Java 17 y Maven instalados.
+2. Base de datos MySQL configurada (`masterbikes_venta_01v`).
+3. Ejecuta:
+   ```bash
+   ./mvnw spring-boot:run
+   ```
 
-## Tecnologías Utilizadas
+## Próximos pasos
 
-* **Spring Boot**: Framework para el desarrollo rápido de aplicaciones Java.
-    * Versión: 3.5.3.
-* **Java**: Versión 17.
-* **Spring Data JPA**: Para la interacción con la base de datos relacional.
-* **Spring Web**: Para construir la API RESTful.
-* **Lombok**: Para reducir el boilerplate code en las clases de modelo y DTO.
-* **Maven**: Herramienta de gestión de proyectos y dependencias.
-* **MySQL Connector/J**: Driver JDBC para conectar con bases de datos MySQL.
-* **Springdoc OpenAPI UI**: Para generar la documentación de la API.
-* **Jakarta Persistence (JPA)**: Para el mapeo objeto-relacional.
-* **RestTemplate**: Para la comunicación HTTP síncrona entre microservicios.
+- Mejorar documentación de endpoints y ejemplos de requests/responses.
+- Consistencia en validaciones y respuestas de error.
 
-## Configuración y Ejecución
-
-Para levantar el microservicio `venta-service`:
-
-1.  **Requisitos**: Asegúrate de tener instalado Java Development Kit (JDK) 17 o superior y Maven.
-2.  **Base de Datos**: Este servicio se conecta a una base de datos MySQL llamada `masterbikes_venta_01v`. Asegúrate de que esta base de datos exista y sea accesible. Los detalles de conexión están configurados en `src/main/resources/application.properties`.
-    * URL: `jdbc:mysql://localhost:3306/masterbikes_venta_01v`
+---
+*Verifica el puerto y la configuración en `application.properties`.*
     * Usuario: `root`
     * Contraseña: (vacía)
     * La propiedad `spring.jpa.hibernate.ddl-auto=update` configurará Hibernate para actualizar el esquema de la base de datos automáticamente al iniciar la aplicación si hay cambios en las entidades.

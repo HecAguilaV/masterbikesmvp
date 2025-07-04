@@ -1,11 +1,3 @@
-<div align="center">
-  <img src="../frontend/images/logo.svg" alt="MasterBikes" width="120"/>
-  <h1>🔐 Auth Service - MasterBikes</h1>
-  <h3>Autenticación y gestión de usuarios</h3>
-  <p><b>Spring Boot · JWT · Seguridad · Sello MasterBikes</b></p>
-</div>
-
----
 # Auth Service - MasterBikes
 
 Microservicio de autenticación y gestión de usuarios para MasterBikes.

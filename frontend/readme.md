@@ -1,90 +1,123 @@
-Markdown
 
-# Frontend del Proyecto MasterBikes
+<div align="center">
+  <img src="../frontend/images/logo.svg" alt="MasterBikes" width="150"/>
+  <h1>🎨 Frontend - MasterBikes</h1>
+  <h3>Accesible, moderno y 100% estático</h3>
+  <p><b>HTML5 · CSS3 · JavaScript puro · Accesibilidad · Consistencia visual</b></p>
+</div>
 
-Esta carpeta contiene todo el código y los recursos relacionados con la interfaz de usuario (UI) y la experiencia del usuario (UX) de la página web de fabricación y arriendo de bicicletas MasterBikes. Aquí se encuentra la lógica de presentación, los componentes visuales y la interacción con el usuario que se ejecuta en el navegador del cliente.
+---
 
-## Contenido
+## 🚦 Descripción
 
-El frontend del proyecto está estructurado para una clara separación de responsabilidades y una fácil mantenibilidad.
+Frontend estático, accesible y profesional para MasterBikes. Incluye catálogo, arriendo, personalización, carrito, login/registro y página de cliente. Integración directa con el API Gateway y microservicios Java.
 
-### 1. Archivos Estáticos (`public/`)
+Cumple con:
+- [x] **Accesibilidad AA (WCAG 2.1)**: roles ARIA, contraste, navegación por teclado, etiquetas semánticas.
+- [x] **Buenas prácticas HTML5/CSS3**: estructura semántica, responsive, uso de Bootstrap y estilos propios.
+- [x] **Consistencia visual y de interacción** en todas las páginas.
+- [x] **Normas de código limpio y modularidad** en JS.
+- [x] **Documentación clara y ejemplos de uso**.
 
-Este directorio alberga los archivos estáticos que se sirven directamente al navegador sin procesamiento adicional del servidor.
+---
 
-* `index.html`: El archivo HTML principal que carga la aplicación. Es la página de entrada de tu sitio web y contiene la estructura base donde se inyectan los demás elementos de la UI.
-* `images/`: Esta carpeta contiene todas las imágenes utilizadas en la página web, tales como logotipos, fotos de bicicletas, iconos, banners, imágenes de componentes, y gráficos promocionales.
+## 📊 Estado actual
 
-### 2. Código Fuente (`src/`)
+- Navbar y barra superior estandarizadas en todas las páginas.
+- Catálogo dinámico, filtrado, carrito y sesión funcionales.
+- Página de cliente accesible y con botón de alto contraste.
+- Scripts de automatización para levantar/detener servicios.
+- Accesibilidad mejorada (roles ARIA, estructura semántica, contraste).
 
-Este directorio es el corazón del frontend, conteniendo todo el código fuente de la aplicación del lado del cliente.
+---
 
-#### 2.1. Archivos de Estilo (`src/styles/` o `src/css/`)
+## 🗂️ Estructura
 
-Contiene todos los archivos CSS que definen la apariencia y el diseño visual de la interfaz de usuario de la página. Los estilos están organizados para ser modulares y facilitar su mantenimiento y escalabilidad.
+- `/index.html`, `/pages/`: Páginas principales.
+- `/css/`: Estilos globales, navbar, catálogo, temas.
+- `/js/`: Lógica de sesión, catálogo, carrito, personalización.
+- `/images/`: Imágenes de productos y recursos visuales.
 
-* `styles.css`: Este es el archivo CSS principal que define los estilos globales de la aplicación. Incluye variables CSS, estilos para la barra de navegación, la sección hero (con efecto parallax), la sección de ciudades/bicicletas, y estilos generales de los botones. También abarca estilos para el acordeón de especificaciones, el botón de cambio de color y el indicador de progreso.
-* `orion-futuristic.css`: Contiene estilos específicos diseñados para una sección o producto con un tema "futurista", particularmente para las bicicletas "Orion". Incluye animaciones de entrada, efectos de zoom en imágenes de producto, estilos para miniaturas de carrusel, reseñas, botones y elementos de personalización de bicicletas. Define variables de color específicas para este tema y animaciones como `starPulse` y `pulsate`.
-* `catalog-styles.css`: Este archivo agrupa los estilos relacionados con el catálogo de bicicletas y la funcionalidad del carrito de compras. Incluye estilos para los ítems del carrito, la visualización del total, el contador de ítems en el carrito y la configuración del Offcanvas (barra lateral) del carrito, así como estilos responsivos para el carrito.
+---
 
-#### 2.2. Lógica JavaScript (`src/js/`)
+## 🔗 Consumo de APIs
 
-Esta carpeta alberga todos los archivos JavaScript que gestionan la interactividad y la lógica dinámica del lado del cliente para las diferentes secciones de la página web.
+El frontend consume los endpoints REST a través del API Gateway (`http://localhost:8080`).
 
-* `catalogo.js`: Gestiona la visualización del catálogo de bicicletas. Implementa la funcionalidad de filtrado de productos (por tipo, tamaño, marca y rango de precios), así como el ordenamiento y el cambio entre vistas de cuadrícula y lista.
-* `orion-futuristic.js`: Contiene scripts específicos para la página del producto "Orion Futuristic". Implementa animaciones, efectos visuales (como el parallax), la inicialización de reseñas, el control de stock por talla, y la lógica para la personalización de la bicicleta "Orion".
-* `pago.js`: Maneja todo el proceso de pago. Incluye la validación de formularios, la simulación de procesamiento de pago, la generación de números de orden y la confirmación de la compra. También se encarga de la integración con servicios externos (como el envío de emails simulado).
-* `personalizacion.js`: Proporciona la funcionalidad para personalizar bicicletas. Permite a los usuarios seleccionar una bicicleta base y añadir diferentes componentes (cuadros, ruedas, transmisiones, frenos), calcula el precio total de la personalización y gestiona la adición de bicicletas personalizadas al carrito.
-* `session.js`: Implementa el sistema de gestión de sesiones de usuario. Controla el inicio y cierre de sesión, almacena la información del usuario en el almacenamiento local y actualiza dinámicamente la interfaz de usuario para reflejar el estado de la sesión (e.g., mostrar botones de login/registro o el menú de usuario).
-* `cart.js`: Contiene la lógica central del carrito de compras. Gestiona la adición, eliminación y actualización de ítems en el carrito, persiste el estado del carrito en el almacenamiento local y actualiza la interfaz de usuario del carrito, incluyendo el recuento de ítems y el total de la compra.
+### Ejemplo de endpoints consumidos
 
-#### 2.3. Componentes y Páginas (Opcional, `src/components/`, `src/pages/`)
+- `GET /api/catalogo/bicicletas` — Listar bicicletas
+- `POST /api/venta/ventas` — Registrar venta
+- `GET /api/inventario` — Consultar stock
 
-* `src/components/`: (Si se usa un framework como React, Vue o Angular) Contendría módulos de UI reutilizables como botones, tarjetas de productos, modales, barras de navegación, etc.
-* `src/pages/`: (Si se usa un framework de SPA) Contendría los componentes principales que representan las diferentes vistas o páginas de la aplicación, como la Página de Inicio, el Catálogo de Bicicletas, el Carrito, la página de Personalización, etc.
+---
 
-### 3. Gestión de Dependencias y Configuración del Proyecto
+## 🤖 Scripts de automatización
 
-Estos archivos gestionan las dependencias del proyecto y su configuración.
+- `run_all.sh` — Levanta todos los servicios y frontend (servidor Python en puerto 8080).
+- `stop_all.sh` — Detiene todos los servicios y frontend.
 
-* `package.json`: Archivo de configuración fundamental que lista las dependencias del proyecto (librerías externas), scripts de ejecución (e.g., `start`, `build`, `test`), y metadatos del proyecto.
-* `package-lock.json` (o `yarn.lock`): Generado automáticamente, registra las versiones exactas de todas las dependencias instaladas, asegurando la consistencia del entorno de desarrollo entre diferentes máquinas.
-* `node_modules/`: Carpeta que contiene todas las librerías de terceros y dependencias del proyecto instaladas. No debe ser versionada en Git.
+---
 
-### 4. Pruebas (`src/test/` o definidas en `package.json`)
+## 🛠️ Próximos pasos
 
-Aunque no se han proporcionado archivos específicos, esta sección estaría dedicada a las pruebas unitarias, de integración y/o end-to-end para el frontend, asegurando la calidad y el correcto funcionamiento de la interfaz de usuario. Los scripts de prueba se definirían en `package.json`.
+- Mejorar fallback de catálogo si la API está caída.
+- Replicar mejoras de accesibilidad en todas las páginas.
+- Documentar ejemplos de requests/responses.
 
-### 5. Cómo Usar
+---
 
-Para poner en marcha el entorno de desarrollo del frontend o compilar la aplicación para producción, sigue estos pasos:
+## 🚀 Cómo levantar el frontend
 
-1.  **Instalar Dependencias**: Asegúrate de tener Node.js y npm (o Yarn) instalados. Desde la raíz de la carpeta `frontend/`, ejecuta:
-    ```bash
-    npm install
-    # o
-    yarn install
-    ```
-2.  **Iniciar el Servidor de Desarrollo**: Para previsualizar la aplicación en tu navegador, ejecuta:
-    ```bash
-    npm start
-    # o
-    yarn start
-    ```
-    Esto generalmente iniciará un servidor en `http://localhost:3000` (o un puerto similar).
-3.  **Compilar para Producción**: Para generar una versión optimizada y lista para desplegar de tu aplicación, ejecuta:
-    ```bash
-    npm run build
-    # o
-    yarn build
-    ```
-    Esto creará una carpeta `build/` (o `dist/`) con los archivos estáticos listos para ser servidos por un servidor web.
+1. Navega a la carpeta `frontend/`.
+2. Ejecuta:
+   ```bash
+   python3 -m http.server 8080
+   ```
+3. Accede a `http://localhost:8080/frontend/index.html` en tu navegador.
 
-## Tecnologías Principales
+---
 
-El frontend de MasterBikes se construye utilizando las siguientes tecnologías:
+## 📁 Estructura de directorios
 
-* **HTML5**: Para estructurar el contenido de las páginas web.
-* **CSS3**: Para estilizar y diseñar la interfaz de usuario, posiblemente utilizando frameworks como Bootstrap para componentes predefinidos y responsividad.
-* **JavaScript**: Para la interactividad del lado del cliente, manipulación del DOM, comunicación con APIs (si aplica) y toda la lógica de UI.
-* *(Otras librerías o frameworks de JavaScript como jQuery, o un framework de SPA si s
+```text
+frontend/
+├── index.html
+├── readme.md
+├── css/
+│   ├── styles.css
+│   ├── navbar.css
+│   ├── catalog-styles.css
+│   ├── orion-futuristic.css
+│   └── ...
+├── images/
+│   ├── (todas las imágenes de productos, banners, logos, etc.)
+├── js/
+│   ├── session.js
+│   ├── catalogo.js
+│   ├── cart.js
+│   ├── personalizacion.js
+│   └── ...
+├── pages/
+│   ├── catalogo.html
+│   ├── arriendo.html
+│   ├── personalizacion.html
+│   ├── formulario.html
+│   ├── contacto.html
+│   ├── cliente.html
+│   └── ...
+└── (otros recursos estáticos)
+```
+
+---
+
+## 🛠️ Tecnologías Principales
+
+- **HTML5**: Estructura semántica y accesible para todas las páginas.
+- **CSS3**: Estilos modernos, responsivos y consistentes, usando Bootstrap y hojas propias.
+- **JavaScript**: Lógica de UI, integración con APIs REST, gestión de sesión y carrito, todo modular y reutilizable.
+- *(Opcional en el futuro: frameworks SPA como React/Vue, o utilidades como jQuery si se requiere, pero actualmente todo es JS puro para máxima consistencia y mantenibilidad.)*
+
+---
+
+> ℹ️ *No requiere Node.js ni npm. Todo es HTML/CSS/JS puro. Cumple con estándares de accesibilidad y buenas prácticas de desarrollo frontend.*
