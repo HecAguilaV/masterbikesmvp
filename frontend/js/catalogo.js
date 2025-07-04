@@ -65,10 +65,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
             initCatalog();
             if (typeof updateCartUI === 'function') updateCartUI();
+            if (typeof window.updateResultsCount === 'function') {
+                window.updateResultsCount(window.bikeData.length, window.bikeData.length);
+            }
         })
         .catch(err => {
             console.error('Error al cargar catálogo:', err);
             productContainer.innerHTML = '<p class="text-danger">No se pudo cargar el catálogo.</p>';
+            if (typeof window.updateResultsCount === 'function') {
+                window.updateResultsCount(0, 0);
+            }
         });
 });
 

@@ -66,6 +66,17 @@ class SessionManager {
 // Initialize session manager
 const sessionManager = new SessionManager();
 
+// Redirección a página de datos del cliente al seleccionar "Perfil" en el menú de usuario
+document.addEventListener('DOMContentLoaded', function() {
+    const perfilLink = document.querySelector('#userMenu .dropdown-item[href="#"] i.bi-person')?.parentElement;
+    if (perfilLink) {
+        perfilLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            window.location.href = '/frontend/pages/cliente.html';
+        });
+    }
+});
+
 // Add logout functionality
 document.addEventListener('DOMContentLoaded', function() {
     const logoutBtn = document.getElementById('logoutBtn');
