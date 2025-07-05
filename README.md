@@ -36,7 +36,7 @@ masterbikes/
 
 MasterBikes es una plataforma integral para amantes del ciclismo, tiendas y talleres. Permite explorar, personalizar y comprar bicicletas, gestionar inventario y sucursales, y administrar ventas, todo con una experiencia moderna, accesible y profesional.
 
-El frontend ha sido modernizado y profesionalizado, con un panel de administración único, seguro y atractivo, totalmente integrado con el backend para la gestión de usuarios e inventario/productos. El acceso está protegido por roles y la estructura del proyecto ha sido simplificada, eliminando duplicados y dejando solo lo esencial para un MVP robusto y funcional.
+El frontend ha sido estandarizado, con un panel de administración único, seguro y atractivo, en proceso de integración con el backend para la gestión de usuarios e inventario/productos. El acceso está protegido por roles y la estructura del proyecto ha sido simplificada, eliminando duplicados y dejando solo lo esencial para un MVP robusto y funcional.
 
 ---
 
@@ -77,7 +77,7 @@ El frontend ha sido modernizado y profesionalizado, con un panel de administraci
 - Flujo completo: registro/login, visualización de catálogo, filtrado, carrito, compra, generación de venta/factura, consulta de stock y sucursales.
 - Integración robusta frontend-backend-DB.
 - Accesibilidad AA, experiencia de usuario profesional.
-- Panel de administración moderno, seguro y funcional, listo para producción.
+- Panel de administración moderno, seguro y funcional.
 - Documentación clara y pruebas funcionales.
 
 ---
@@ -128,11 +128,11 @@ El frontend ha sido modernizado y profesionalizado, con un panel de administraci
 ## 🛡️ Panel de Administración Moderno
 
 - Una sola página (`frontend/pages/admin.html`) con tabs para gestión de usuarios y productos.
-- Un solo JS (`frontend/js/admin.js`) con lógica centralizada, lista para conectar con backend real.
+- Un solo JS (`frontend/js/admin.js`) con lógica centralizada, se debe conectar con backend real.
 - Modales Bootstrap para alta/edición de usuarios y productos.
 - Protección de acceso solo para admin, login por roles y navegación segura.
 - Integración real con backend para CRUD de usuarios e inventario vía API Gateway (en proceso de validación final).
-- Estructura visual profesional y moderna, lista para producción.
+- Estructura visual atractiva y moderna.
 
 ---
 
@@ -162,7 +162,7 @@ El frontend ha sido modernizado y profesionalizado, con un panel de administraci
 
 - `run_all.sh` — Levanta todos los servicios y frontend.
 - `restart_all.sh` — Reinicia todos los servicios.
-- `stop_all.sh` / `stop_all_services.sh` — Detiene todos los servicios.
+- `stop_all_services.sh` — Detiene todos los servicios.
 - `autorizar_scripts.sh` — Da permisos de ejecución a los scripts.
 
 ---
@@ -170,9 +170,8 @@ El frontend ha sido modernizado y profesionalizado, con un panel de administraci
 
 ## 📬 Contacto y soporte
 
-- **Email:** contacto@masterbikes.cl
-- **Teléfono:** +56 2 2345 6789
+®MasterBikes
 
 ---
 
-> ℹ️ *Verifica los puertos en los archivos `application.properties` de cada microservicio. Puede haber diferencias según entorno.*
+> ℹ️ *Verificar los puertos en los archivos `application.properties` de cada microservicio. Puede haber diferencias según entorno.*
