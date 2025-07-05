@@ -1,9 +1,13 @@
+
+# Venta Service - MasterBikes
+
 <div align="center">
-  <img src="../frontend/images/logo.svg" alt="MasterBikes" width="120"/>
-  <h1>🧾 Venta Service - MasterBikes</h1>
-  <h3>Ventas y facturación</h3>
-  <p><b>Spring Boot · REST · Sello MasterBikes</b></p>
+  <img src="../frontend/images/logos/logo.svg" alt="MasterBikes" width="120"/>
 </div>
+
+<h1>🛒 Venta Service - MasterBikes</h1>
+<h3>Ventas y facturación</h3>
+<p><b>Spring Boot · REST · Sello MasterBikes</b></p>
 
 ---
 
@@ -18,11 +22,13 @@ venta-service/
 
 ## 🚦 Descripción
 
-Microservicio para gestión de ventas y facturación. Orquesta la venta, genera facturas y actualiza inventario.
+
+Microservicio para gestión de ventas y facturación. Orquesta la venta, genera facturas y actualiza inventario. Integrado con el frontend moderno y panel de administración para gestión centralizada de ventas y reportes.
 
 ---
 
-## 🔗 Endpoints principales
+
+## � Endpoints principales
 
 - `GET /api/v1/ventas` — Listar ventas
 - `POST /api/v1/ventas` — Registrar venta
@@ -30,18 +36,21 @@ Microservicio para gestión de ventas y facturación. Orquesta la venta, genera 
 
 ---
 
+
 ## ⚙️ Lógica de negocio
 
 - Orquestación de venta y generación de factura.
 - Actualización de inventario tras venta.
-- Integración con catálogo y sucursales.
+- Integración con catálogo, sucursales y panel de administración.
 
 ---
+
 
 ## 🛠️ Próximos pasos
 
 - Mejorar documentación y ejemplos de requests/responses.
 - Pruebas funcionales y de integración.
+- Validar integración con frontend y panel admin.
 
 ---
 

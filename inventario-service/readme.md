@@ -1,9 +1,13 @@
+
+# Inventario Service - MasterBikes
+
 <div align="center">
-  <img src="../frontend/images/logo.svg" alt="MasterBikes" width="120"/>
-  <h1>📦 Inventario Service - MasterBikes</h1>
-  <h3>Stock y movimientos de inventario</h3>
-  <p><b>Spring Boot · REST · Sello MasterBikes</b></p>
+  <img src="../frontend/images/logos/logo.svg" alt="MasterBikes" width="120"/>
 </div>
+
+<h1>📦 Inventario Service - MasterBikes</h1>
+<h3>Stock y movimientos de inventario</h3>
+<p><b>Spring Boot · REST · Sello MasterBikes</b></p>
 
 ---
 
@@ -18,11 +22,13 @@ inventario-service/
 
 ## 🚦 Descripción
 
-Microservicio para gestión de inventario, stock y movimientos automáticos al vender. Integración con catálogo y ventas.
+
+Microservicio para gestión de inventario, stock y movimientos automáticos al vender. Integrado con catálogo, ventas y el panel de administración moderno para gestión centralizada de productos.
 
 ---
 
-## 🔗 Endpoints principales
+
+## � Endpoints principales
 
 - `GET /api/v1/inventarios` — Listar inventario
 - `POST /api/v1/movimientosinventario` — Registrar movimiento
@@ -30,18 +36,21 @@ Microservicio para gestión de inventario, stock y movimientos automáticos al v
 
 ---
 
+
 ## ⚙️ Lógica de negocio
 
 - Control de stock y movimientos.
 - Actualización automática tras ventas.
-- Integración con catálogo y sucursales.
+- Integración con catálogo, sucursales y panel de administración.
 
 ---
+
 
 ## 🛠️ Próximos pasos
 
 - Mejorar documentación y ejemplos de requests/responses.
 - Pruebas funcionales y de integración.
+- Validar integración con frontend y panel admin.
 
 ---
 

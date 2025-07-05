@@ -18,7 +18,7 @@
     </style>
 </head>
 <body>
-    <script>protectPage('admin');</script>
+    <script>protectPage('ADMIN');</script>
     <div class="top-bar">
         ¿Dudas? Llámanos al <b>+56232149673</b> | L-V: 8:30 a 18:15 - V: 8:30 a 16:00 | <a href="/frontend/pages/formulario.html" class="contact-link">Formulario de contacto</a>
     </div>
@@ -49,17 +49,82 @@
         <div class="admin-title text-center">Panel de Administración</div>
         <ul class="nav nav-pills mb-3 justify-content-center" id="admin-tabs" role="tablist">
             <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="productos-tab" data-bs-toggle="pill" data-bs-target="#productos" type="button" role="tab">Productos</button>
+                <button class="nav-link active" id="usuarios-tab" data-bs-toggle="pill" data-bs-target="#usuarios" type="button" role="tab">Usuarios</button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link" id="usuarios-tab" data-bs-toggle="pill" data-bs-target="#usuarios" type="button" role="tab">Usuarios</button>
+                <button class="nav-link" id="productos-tab" data-bs-toggle="pill" data-bs-target="#productos" type="button" role="tab">Productos</button>
             </li>
         </ul>
         <div class="tab-content" id="admin-tabs-content">
-            <!-- Gestión de Inventario -->
-            <div class="tab-pane fade show active" id="productos" role="tabpanel">
+            <!-- Gestión de Usuarios -->
+            <div class="tab-pane fade show active" id="usuarios" role="tabpanel">
                 <div class="card admin-card mb-4">
-                    <div class="card-header">Gestión de Inventario por Sucursal</div>
+                    <div class="card-header">Gestión de Usuarios</div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped align-middle" id="tabla-usuarios">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Nombre</th>
+                                        <th>Email</th>
+                                        <th>Rol</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Aquí se renderizarán los usuarios desde el backend -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <button class="btn btn-success mt-3" id="btn-agregar-usuario" data-bs-toggle="modal" data-bs-target="#modalUsuario">
+                            <i class="fas fa-user-plus me-2"></i>Agregar Usuario
+                        </button>
+                        <!-- Modal Alta Usuario -->
+                        <div class="modal fade" id="modalUsuario" tabindex="-1" aria-labelledby="modalUsuarioLabel" aria-hidden="true">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="modalUsuarioLabel">Agregar Usuario</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                              </div>
+                              <div class="modal-body">
+                                <form id="formUsuario">
+                                  <div class="mb-3">
+                                    <label for="usuarioNombre" class="form-label">Nombre</label>
+                                    <input type="text" class="form-control" id="usuarioNombre" required>
+                                  </div>
+                                  <div class="mb-3">
+                                    <label for="usuarioEmail" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="usuarioEmail" required>
+                                  </div>
+                                  <div class="mb-3">
+                                    <label for="usuarioPassword" class="form-label">Contraseña</label>
+                                    <input type="password" class="form-control" id="usuarioPassword" required>
+                                  </div>
+                                  <div class="mb-3">
+                                    <label for="usuarioRol" class="form-label">Rol</label>
+                                    <select class="form-select" id="usuarioRol" required>
+                                      <option value="CLIENTE">Cliente</option>
+                                      <option value="ADMIN">Admin</option>
+                                      <option value="SUPERVISOR">Supervisor</option>
+                                      <option value="TECNICO">Técnico</option>
+                                      <option value="VENDEDOR">Vendedor</option>
+                                    </select>
+                                  </div>
+                                  <button type="submit" class="btn btn-primary">Guardar</button>
+                                </form>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Gestión de Productos -->
+            <div class="tab-pane fade" id="productos" role="tabpanel">
+                <div class="card admin-card mb-4">
+                    <div class="card-header">Gestión de Inventario</div>
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table table-striped align-middle" id="tabla-inventario">
@@ -117,71 +182,6 @@
                                     <input type="text" class="form-control" id="productoImagen">
                                   </div>
                                   <input type="hidden" id="productoId">
-                                  <button type="submit" class="btn btn-primary">Guardar</button>
-                                </form>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Gestión de Usuarios -->
-            <div class="tab-pane fade" id="usuarios" role="tabpanel">
-                <div class="card admin-card mb-4">
-                    <div class="card-header">Gestión de Usuarios</div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-striped align-middle" id="tabla-usuarios">
-                                <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Nombre</th>
-                                        <th>Email</th>
-                                        <th>Rol</th>
-                                        <th>Acciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <!-- Aquí se renderizarán los usuarios desde el backend -->
-                                </tbody>
-                            </table>
-                        </div>
-                        <button class="btn btn-success mt-3" id="btn-agregar-usuario" data-bs-toggle="modal" data-bs-target="#modalUsuario">
-                            <i class="fas fa-user-plus me-2"></i>Agregar Usuario
-                        </button>
-                        <!-- Modal Alta Usuario -->
-                        <div class="modal fade" id="modalUsuario" tabindex="-1" aria-labelledby="modalUsuarioLabel" aria-hidden="true">
-                          <div class="modal-dialog">
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <h5 class="modal-title" id="modalUsuarioLabel">Agregar Usuario</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-                              </div>
-                              <div class="modal-body">
-                                <form id="formUsuario">
-                                  <div class="mb-3">
-                                    <label for="usuarioNombre" class="form-label">Nombre</label>
-                                    <input type="text" class="form-control" id="usuarioNombre" required>
-                                  </div>
-                                  <div class="mb-3">
-                                    <label for="usuarioEmail" class="form-label">Email</label>
-                                    <input type="email" class="form-control" id="usuarioEmail" required>
-                                  </div>
-                                  <div class="mb-3">
-                                    <label for="usuarioPassword" class="form-label">Contraseña</label>
-                                    <input type="password" class="form-control" id="usuarioPassword" required>
-                                  </div>
-                                  <div class="mb-3">
-                                    <label for="usuarioRol" class="form-label">Rol</label>
-                                    <select class="form-select" id="usuarioRol" required>
-                                      <option value="CLIENTE">Cliente</option>
-                                      <option value="ADMIN">Admin</option>
-                                      <option value="SUPERVISOR">Supervisor</option>
-                                      <option value="TECNICO">Técnico</option>
-                                      <option value="VENDEDOR">Vendedor</option>
-                                    </select>
-                                  </div>
                                   <button type="submit" class="btn btn-primary">Guardar</button>
                                 </form>
                               </div>

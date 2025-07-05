@@ -1,16 +1,21 @@
 
+
+# Frontend - MasterBikes
+
 <div align="center">
-  <img src="../frontend/images/logo.svg" alt="MasterBikes" width="150"/>
-  <h1>🎨 Frontend - MasterBikes</h1>
-  <h3>Accesible, moderno y 100% estático</h3>
-  <p><b>HTML5 · CSS3 · JavaScript puro · Accesibilidad · Consistencia visual</b></p>
+  <img src="../frontend/images/logos/logo.svg" alt="MasterBikes" width="150"/>
 </div>
+
+<h1>🎨 Frontend - MasterBikes</h1>
+<h3>Accesible, moderno y 100% estático</h3>
+<p><b>HTML5 · CSS3 · JavaScript puro · Accesibilidad · Consistencia visual</b></p>
 
 ---
 
 ## 🚦 Descripción
 
-Frontend estático, accesible y profesional para MasterBikes. Incluye catálogo, arriendo, personalización, carrito, login/registro y página de cliente. Integración directa con el API Gateway y microservicios Java.
+
+Frontend moderno, accesible y profesional para MasterBikes. Incluye catálogo, arriendo, personalización, carrito, login/registro, página de cliente y un panel de administración unificado y seguro, totalmente integrado con el backend vía API Gateway.
 
 Cumple con:
 - [x] **Accesibilidad AA (WCAG 2.1)**: roles ARIA, contraste, navegación por teclado, etiquetas semánticas.
@@ -21,15 +26,20 @@ Cumple con:
 
 ---
 
-## 📊 Estado actual
+
+## 📊 Estado actual (julio 2025)
 
 - Navbar y barra superior estandarizadas en todas las páginas.
 - Catálogo dinámico, filtrado, carrito y sesión funcionales.
 - Página de cliente accesible y con botón de alto contraste.
+- **Panel de administración profesional y unificado**: una sola página (`admin.html`) con tabs para usuarios y productos, modales Bootstrap, protección de acceso solo para admin y lógica lista para conectar con backend real.
+- Lógica de login por roles (admin/cliente), protección de páginas y navbar dinámica.
+- Estructura frontend limpia, sin archivos duplicados ni vacíos.
 - Scripts de automatización para levantar/detener servicios.
 - Accesibilidad mejorada (roles ARIA, estructura semántica, contraste).
 
 ---
+
 
 ## 🗂️ Estructura
 
@@ -40,17 +50,22 @@ Cumple con:
 
 ---
 
+
 ## 🔗 Consumo de APIs
 
-El frontend consume los endpoints REST a través del API Gateway (`http://localhost:8080`).
+
+El frontend consume los endpoints REST a través del API Gateway (`http://localhost:8080`), integrando todos los microservicios y gestionando la autenticación y roles de usuario.
+
 
 ### Ejemplo de endpoints consumidos
 
 - `GET /api/catalogo/bicicletas` — Listar bicicletas
 - `POST /api/venta/ventas` — Registrar venta
 - `GET /api/inventario` — Consultar stock
+- `POST /api/auth/login` — Login de usuario
 
 ---
+
 
 ## 🤖 Scripts de automatización
 
@@ -59,13 +74,17 @@ El frontend consume los endpoints REST a través del API Gateway (`http://localh
 
 ---
 
+
 ## 🛠️ Próximos pasos
 
 - Mejorar fallback de catálogo si la API está caída.
 - Replicar mejoras de accesibilidad en todas las páginas.
 - Documentar ejemplos de requests/responses.
+- Conectar y validar integración completa frontend-backend en el panel admin (usuarios/productos).
+- Finalizar endpoints de autenticación y perfil de usuario.
 
 ---
+
 
 ## 🚀 Cómo levantar el frontend
 

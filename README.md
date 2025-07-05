@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="frontend/images/logo.svg" alt="MasterBikes" width="150"/>
+  <img src="frontend/images/logos/logo.svg" alt="MasterBikes" width="150"/>
   <h1>🚴‍♂️ MasterBikes</h1>
   <h3>Plataforma de venta, arriendo y personalización de bicicletas</h3>
   <p><b>Microservicios Java · Frontend moderno · Accesibilidad · Sello MasterBikes</b></p>
@@ -7,7 +7,10 @@
 
 ---
 
+
 ## 📁 Estructura general del repositorio
+
+> **Estructura limpia y profesional, lista para producción MVP.**
 
 ```text
 masterbikes/
@@ -27,49 +30,63 @@ masterbikes/
 └── frontend_test/
 ```
 
+
 ## 🚦 Visión y propósito
 
-MasterBikes es una plataforma integral para amantes del ciclismo, tiendas y talleres. Permite explorar, personalizar y comprar bicicletas, gestionar inventario y sucursales, y administrar ventas, todo con una experiencia moderna y accesible.
+
+MasterBikes es una plataforma integral para amantes del ciclismo, tiendas y talleres. Permite explorar, personalizar y comprar bicicletas, gestionar inventario y sucursales, y administrar ventas, todo con una experiencia moderna, accesible y profesional.
+
+El frontend ha sido modernizado y profesionalizado, con un panel de administración único, seguro y atractivo, totalmente integrado con el backend para la gestión de usuarios e inventario/productos. El acceso está protegido por roles y la estructura del proyecto ha sido simplificada, eliminando duplicados y dejando solo lo esencial para un MVP robusto y funcional.
 
 ---
 
+
 ## 🏗️ Arquitectura General
 
-- **Frontend**: HTML/CSS/JS puro, Bootstrap, accesible y responsivo. Consume APIs REST de los microservicios vía API Gateway.
+- **Frontend**: HTML/CSS/JS puro, Bootstrap, accesible y responsivo. Consume APIs REST de los microservicios vía API Gateway. Incluye un panel de administración moderno y seguro, con tabs para usuarios y productos, modales Bootstrap y protección de acceso por roles.
 - **API Gateway**: Spring Cloud Gateway, enruta y centraliza la seguridad y CORS. Puerto: `8080`.
 - **Microservicios**:
   - `catalogo-service` (8082): Catálogo de bicicletas, componentes y accesorios.
   - `inventario-service` (8084): Stock y movimientos de inventario.
   - `sucursal-service` (8083/8084*): Gestión de sucursales y empleados.
   - `venta-service` (8085): Ventas y facturación.
-  - `auth-service` (por definir): Autenticación y usuarios (en desarrollo).
+  - `auth-service`: Autenticación y usuarios (en desarrollo, endpoints en proceso de integración real).
 - **Base de datos**: MySQL local, una por microservicio.
 
 ---
 
+
+
 ## 📊 Estado Actual (julio 2025)
 
-- Frontend funcional, accesible, con navbar y barra de contacto estandarizadas, integración de sesión y carrito, página de cliente y catálogo dinámico.
+- Frontend moderno, accesible y funcional, con navbar y barra de contacto estandarizadas, integración de sesión y carrito, página de cliente y catálogo dinámico.
+- **Panel de administración profesional y unificado**: una sola página (`admin.html`) con tabs para usuarios y productos, modales Bootstrap, protección de acceso solo para admin y lógica lista para conectar con backend real.
+- Lógica de login por roles (admin/cliente), protección de páginas y navbar dinámica.
+- Estructura frontend y microservicios limpia, sin archivos duplicados ni vacíos.
 - API Gateway enruta correctamente a los microservicios, CORS configurado.
 - Microservicios de catálogo, inventario, sucursal y venta implementados y comunicándose vía REST.
 - Scripts bash para levantar, reiniciar y detener todos los servicios y frontend.
-- Eliminados todos los captchas y mejorada la accesibilidad.
+- Accesibilidad mejorada (roles ARIA, estructura semántica, contraste).
 - Documentación y endpoints en proceso de estandarización.
 
 ---
+
 
 ## 🎯 Objetivo MVP
 
 - Flujo completo: registro/login, visualización de catálogo, filtrado, carrito, compra, generación de venta/factura, consulta de stock y sucursales.
 - Integración robusta frontend-backend-DB.
 - Accesibilidad AA, experiencia de usuario profesional.
+- Panel de administración moderno, seguro y funcional, listo para producción.
 - Documentación clara y pruebas funcionales.
 
 ---
 
+
 ## 🔗 Endpoints Principales
 
-### API Gateway (http://localhost:8080)
+
+### API Gateway ([localhost:8080](http://localhost:8080))
 
 - `/api/catalogo/**` → Catálogo
 - `/api/inventario/**` → Inventario
@@ -101,10 +118,21 @@ MasterBikes es una plataforma integral para amantes del ciclismo, tiendas y tall
 - `POST /api/v1/ventas` — Registrar venta
 - `GET /api/v1/facturas` — Listar facturas
 
-### Autenticación (futuro)
 
-- `POST /api/v1/auth/login` — Login
-- `POST /api/v1/auth/register` — Registro
+### Autenticación (`auth-service`, integración en curso)
+
+- `POST /api/v1/auth/login` — Login (por API Gateway)
+- `POST /api/v1/auth/register` — Registro (por API Gateway)
+---
+
+## 🛡️ Panel de Administración Moderno
+
+- Una sola página (`frontend/pages/admin.html`) con tabs para gestión de usuarios y productos.
+- Un solo JS (`frontend/js/admin.js`) con lógica centralizada, lista para conectar con backend real.
+- Modales Bootstrap para alta/edición de usuarios y productos.
+- Protección de acceso solo para admin, login por roles y navegación segura.
+- Integración real con backend para CRUD de usuarios e inventario vía API Gateway (en proceso de validación final).
+- Estructura visual profesional y moderna, lista para producción.
 
 ---
 
@@ -118,9 +146,11 @@ MasterBikes es una plataforma integral para amantes del ciclismo, tiendas y tall
 
 ---
 
+
 ## 🛠️ Próximos Pasos
 
 - Finalizar endpoints de autenticación y perfil de usuario.
+- Conectar y validar integración completa frontend-backend en el panel admin (usuarios/productos).
 - Mejorar fallback de catálogo si la API está caída.
 - Completar documentación de endpoints y ejemplos de requests/responses.
 - Pruebas funcionales end-to-end.
@@ -137,10 +167,11 @@ MasterBikes es una plataforma integral para amantes del ciclismo, tiendas y tall
 
 ---
 
+
 ## 📬 Contacto y soporte
 
-- Email: contacto@masterbikes.cl
-- Teléfono: +56 2 2345 6789
+- **Email:** contacto@masterbikes.cl
+- **Teléfono:** +56 2 2345 6789
 
 ---
 

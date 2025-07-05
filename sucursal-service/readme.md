@@ -1,9 +1,13 @@
+
+# Sucursal Service - MasterBikes
+
 <div align="center">
-  <img src="../frontend/images/logo.svg" alt="MasterBikes" width="120"/>
-  <h1>🏢 Sucursal Service - MasterBikes</h1>
-  <h3>Gestión de sucursales y empleados</h3>
-  <p><b>Spring Boot · REST · Sello MasterBikes</b></p>
+  <img src="../frontend/images/logos/logo.svg" alt="MasterBikes" width="120"/>
 </div>
+
+<h1>🏢 Sucursal Service - MasterBikes</h1>
+<h3>Gestión de sucursales y empleados</h3>
+<p><b>Spring Boot · REST · Sello MasterBikes</b></p>
 
 ---
 
@@ -18,11 +22,13 @@ sucursal-service/
 
 ## 🚦 Descripción
 
-Microservicio para gestión de sucursales y empleados. Permite CRUD y consulta de información relevante para ventas y operaciones.
+
+Microservicio para gestión de sucursales y empleados. Permite CRUD y consulta de información relevante para ventas y operaciones. Integrado con el frontend moderno y panel de administración para gestión centralizada.
 
 ---
 
-## 🔗 Endpoints principales
+
+## � Endpoints principales
 
 - `GET /api/v1/sucursales` — Listar sucursales
 - `POST /api/v1/sucursales` — Crear sucursal
@@ -30,17 +36,20 @@ Microservicio para gestión de sucursales y empleados. Permite CRUD y consulta d
 
 ---
 
+
 ## ⚙️ Lógica de negocio
 
 - CRUD de sucursales y empleados.
-- Integración con ventas y catálogo.
+- Integración con ventas, catálogo y panel de administración.
 
 ---
+
 
 ## 🛠️ Próximos pasos
 
 - Mejorar documentación y ejemplos de requests/responses.
 - Pruebas funcionales y de integración.
+- Validar integración con frontend y panel admin.
 
 ---
 
