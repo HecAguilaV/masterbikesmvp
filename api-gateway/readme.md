@@ -7,45 +7,68 @@
 
 <h1>🚦 API Gateway - MasterBikes</h1>
 <h3>Enrutamiento, seguridad y acceso centralizado</h3>
-<p><b>Spring Cloud Gateway · Seguridad · CORS · Sello MasterBikes</b></p>
+<p><b>Spring Cloud Gateway · WebFlux · CORS · Sello MasterBikes</b></p>
 
 ---
 
-## 📁 Estructura de directorios
+## 📁 Estructura del proyecto
 
 ```text
 api-gateway/
+├── .mvn/
+├── src/
+│   ├── main/
+│   │   ├── java/
+│   │   │   └── masterbikes/
+│   │   │       └── api_gateway/
+│   │   │           ├── ApiGatewayApplication.java
+│   │   │           └── CorsConfig.java
+│   │   └── resources/
+│   │       └── application.properties
+│   └── test/
+├── target/
+├── mvnw
+├── mvnw.cmd
 ├── pom.xml
-├── readme.md
-└── ...
+└── readme.md
 ```
 
 ## 🚦 Descripción
 
+API Gateway centraliza el enrutamiento y la gestión de CORS para todos los microservicios de MasterBikes. Utiliza Spring Cloud Gateway con WebFlux para crear un punto de entrada único que facilita la integración del frontend con todos los servicios backend.
 
-API Gateway centraliza el enrutamiento, la seguridad y el acceso a los microservicios de MasterBikes. Gestiona CORS, autenticación, protección de rutas y expone los endpoints REST del sistema, permitiendo la integración real del frontend moderno y el panel de administración.
+## 🔗 Configuración de rutas
 
----
+**Puerto:** `8080`
 
+### Rutas configuradas:
+- `/api/catalogo/**` → `http://localhost:8082` (Catálogo Service)
+- `/api/inventario/**` → `http://localhost:8084` (Inventario Service)  
+- `/api/sucursal/**` → `http://localhost:8083` (Sucursal Service)
+- `/api/venta/**` → `http://localhost:8085` (Venta Service)
+- `/auth/**` → `http://localhost:8081` (Auth Service)
+- `/api/usuarios/**` → `http://localhost:8081` (Auth Service - Gestión de usuarios)
 
-## 🔗 Endpoints principales
+## ⚙️ Características técnicas
 
-- `/api/catalogo/**` → Catálogo
-- `/api/inventario/**` → Inventario
-- `/api/sucursal/**` → Sucursales
-- `/api/venta/**` → Ventas
-- `/api/auth/**` → Autenticación y gestión de usuarios
+- **Framework:** Spring Boot 3.5.3 con Spring Cloud Gateway
+- **Protocolo:** WebFlux (programación reactiva)
+- **CORS:** Configurado para permitir origen `http://localhost:3000`
+- **Métodos HTTP:** GET, POST, PUT, DELETE, OPTIONS
+- **Headers:** Permitidos todos (`*`)
+- **Filtros:** StripPrefix para limpiar rutas
 
----
+## 🛠️ Configuración principal
 
+### CORS Global
+```properties
+spring.cloud.gateway.server.webflux.globalcors.cors-configurations.[/**].allowedOrigins=http://localhost:3000
+spring.cloud.gateway.server.webflux.globalcors.cors-configurations.[/**].allowedMethods=GET,POST,PUT,DELETE,OPTIONS
+spring.cloud.gateway.server.webflux.globalcors.cors-configurations.[/**].allowedHeaders=*
+```
 
-## ⚙️ Características
-
-- Enrutamiento dinámico a microservicios.
-- Seguridad y CORS centralizados.
-- Integración con Spring Cloud Gateway.
-- Integración real con frontend moderno y panel admin seguro.
-- Documentación y pruebas en proceso de mejora.
+### Enrutamiento automático
+Todas las rutas usan `StripPrefix=2` para `/api/*` y `StripPrefix=0` para `/auth/*` y `/api/usuarios/*`
 
 ---
 
