@@ -44,14 +44,16 @@ El frontend ha sido estandarizado, con un panel de administración único, segur
 ## 🏗️ Arquitectura General
 
 - **Frontend**: HTML/CSS/JS puro, Bootstrap, accesible y responsivo. Consume APIs REST de los microservicios vía API Gateway. Incluye un panel de administración moderno y seguro, con tabs para usuarios y productos, modales Bootstrap y protección de acceso por roles.
-- **API Gateway**: Spring Cloud Gateway, enruta y centraliza la seguridad y CORS. Puerto: `8080`.
+- **API Gateway**: Spring Cloud Gateway con WebFlux, enruta y centraliza CORS. Puerto: `8080`. ✅ **FUNCIONAL**
 - **Microservicios**:
-  - `catalogo-service` (8082): Catálogo de bicicletas, componentes y accesorios.
-  - `inventario-service` (8084): Stock y movimientos de inventario.
-  - `sucursal-service` (8083/8084*): Gestión de sucursales y empleados.
-  - `venta-service` (8085): Ventas y facturación.
-  - `auth-service`: Autenticación y usuarios (en desarrollo, endpoints en proceso de integración real).
-- **Base de datos**: MySQL local, una por microservicio.
+  - `catalogo-service` (8082): Catálogo de bicicletas, componentes y accesorios con personalización avanzada. ✅ **FUNCIONAL**
+  - `inventario-service` (8084): Control de stock, movimientos automáticos y reportes por sucursal. ✅ **FUNCIONAL**
+  - `sucursal-service` (8083): Gestión de sucursales y empleados con CRUD completo. ✅ **FUNCIONAL**
+  - `venta-service` (8085): Orquestación de ventas, facturación e integración con inventario. ✅ **FUNCIONAL**
+  - `auth-service` (8081): Servicio de autenticación con errores de compilación. ❌ **NO FUNCIONAL**
+- **Base de datos**: MySQL local, una por microservicio con relaciones optimizadas.
+- **Comunicación**: RestTemplate para comunicación entre microservicios funcionando.
+- **Autenticación**: Simulada en frontend, auth-service no integrado por errores técnicos.
 
 ---
 
@@ -59,26 +61,44 @@ El frontend ha sido estandarizado, con un panel de administración único, segur
 
 ## 📊 Estado Actual (julio 2025)
 
-- Frontend moderno, accesible y funcional, con navbar y barra de contacto estandarizadas, integración de sesión y carrito, página de cliente y catálogo dinámico.
-- **Panel de administración profesional y unificado**: una sola página (`admin.html`) con tabs para usuarios y productos, modales Bootstrap, protección de acceso solo para admin y lógica lista para conectar con backend real.
-- Lógica de login por roles (admin/cliente), protección de páginas y navbar dinámica.
-- Estructura frontend y microservicios limpia, sin archivos duplicados ni vacíos.
-- API Gateway enruta correctamente a los microservicios, CORS configurado.
-- Microservicios de catálogo, inventario, sucursal y venta implementados y comunicándose vía REST.
-- Scripts bash para levantar, reiniciar y detener todos los servicios y frontend.
-- Accesibilidad mejorada (roles ARIA, estructura semántica, contraste).
-- Documentación y endpoints en proceso de estandarización.
+- **Frontend moderno y funcional:** Navbar estandarizada, catálogo dinámico, carrito de compras, sistema de sesiones **simulado** y páginas de cliente completamente integradas.
+- **Panel de administración:** Una sola página (`admin.html`) con tabs para usuarios y productos, modales Bootstrap, protección de acceso por roles **simulada** (no conectada a auth-service real).
+- **Microservicios implementados y funcionales:**
+  - **API Gateway:** ✅ Enrutamiento WebFlux, CORS configurado, rutas a todos los servicios
+  - **Catálogo Service:** ✅ CRUD completo de bicicletas/componentes/accesorios, personalización con DTOs
+  - **Inventario Service:** ✅ Control de stock, movimientos automáticos, reportes por sucursal
+  - **Sucursal Service:** ✅ Gestión completa de sucursales y empleados
+  - **Venta Service:** ✅ Orquestación completa, integración con inventario y catálogo
+  - **Auth Service:** ❌ Desarrollado pero con errores de compilación, no funcional
+- **Integración entre servicios:** ✅ Comunicación entre microservicios mediante RestTemplate funciona
+- **Base de datos:** ✅ MySQL por microservicio con relaciones optimizadas
+- **Scripts de automatización:** ✅ Completos para levantar, reiniciar y detener servicios
+- **Autenticación:** ⚠️ Simulada en frontend, sin backend real de usuarios
+- **Documentación:** ✅ READMEs actualizados con estado real de cada servicio
 
 ---
 
 
-## 🎯 Objetivo MVP
+## 🎯 Objetivo MVP (Estado actual)
 
-- Flujo completo: registro/login, visualización de catálogo, filtrado, carrito, compra, generación de venta/factura, consulta de stock y sucursales.
-- Integración robusta frontend-backend-DB.
-- Accesibilidad AA, experiencia de usuario profesional.
-- Panel de administración moderno, seguro y funcional.
-- Documentación clara y pruebas funcionales.
+### ✅ Lo que funciona
+- Visualización de catálogo, filtrado, carrito de compras
+- Generación de venta/factura con integración entre servicios
+- Consulta de stock y sucursales
+- Integración frontend-backend-DB para servicios principales
+- Panel de administración con interfaz completa
+
+### ⚠️ Lo que está simulado
+- Registro/login de usuarios (frontend mock)
+- Gestión de usuarios en panel admin (datos de prueba)
+- Autenticación y autorización
+
+### ❌ Lo que falta
+- Auth-service funcional
+- Integración real de usuarios entre frontend y backend
+- Sistema de roles real conectado
+
+**Nivel alcanzado:** MVP funcional para catálogo, inventario, ventas y sucursales. Autenticación pendiente por problemas técnicos.
 
 ---
 
@@ -119,20 +139,28 @@ El frontend ha sido estandarizado, con un panel de administración único, segur
 - `GET /api/v1/facturas` — Listar facturas
 
 
-### Autenticación (`auth-service`, integración en curso)
+### Autenticación (`auth-service`, puerto 8081)
 
-- `POST /api/v1/auth/login` — Login (por API Gateway)
-- `POST /api/v1/auth/register` — Registro (por API Gateway)
+**⚠️ SERVICIO NO FUNCIONAL - Errores de compilación**
+
+- `POST /auth/login` — Login con JWT (NO DISPONIBLE)
+- `POST /auth/register` — Registro de usuario (NO DISPONIBLE)
+- `GET /api/usuarios` — Listar usuarios (NO DISPONIBLE)
+- `POST /api/usuarios` — Crear usuario (NO DISPONIBLE)
+- `PUT /api/usuarios/{id}` — Actualizar usuario (NO DISPONIBLE)
+- `DELETE /api/usuarios/{id}` — Eliminar usuario (NO DISPONIBLE)
+
+*El frontend usa autenticación simulada para demostración.*
 ---
 
-## 🛡️ Panel de Administración Moderno
+## 🛡️ Panel de Administración
 
 - Una sola página (`frontend/pages/admin.html`) con tabs para gestión de usuarios y productos.
-- Un solo JS (`frontend/js/admin.js`) con lógica centralizada, se debe conectar con backend real.
+- Un solo JS (`frontend/js/admin.js`) con lógica centralizada.
 - Modales Bootstrap para alta/edición de usuarios y productos.
-- Protección de acceso solo para admin, login por roles y navegación segura.
-- Integración real con backend para CRUD de usuarios e inventario vía API Gateway (en proceso de validación final).
-- Estructura visual atractiva y moderna.
+- **Protección de acceso simulada** - no conectada con auth-service real.
+- **Datos mock** para demostración de funcionalidad.
+- Estructura visual moderna completamente implementada.
 
 ---
 
@@ -147,14 +175,24 @@ El frontend ha sido estandarizado, con un panel de administración único, segur
 ---
 
 
-## 🛠️ Próximos Pasos
+## 🛠️ Próximos Pasos (realistas)
 
-- Finalizar endpoints de autenticación y perfil de usuario.
-- Conectar y validar integración completa frontend-backend en el panel admin (usuarios/productos).
-- Mejorar fallback de catálogo si la API está caída.
-- Completar documentación de endpoints y ejemplos de requests/responses.
-- Pruebas funcionales end-to-end.
-- Mejorar accesibilidad en todas las páginas.
+### Prioridad alta
+- **Arreglar auth-service:** Solucionar errores de compilación en Usuario.java
+- **Conectar autenticación:** Integrar auth-service funcional con frontend
+- **Probar integración completa:** Validar flujo end-to-end con usuarios reales
+
+### Prioridad media  
+- **Optimización:** Mejorar performance entre microservicios
+- **Documentación API:** Swagger para endpoints funcionales
+- **Pruebas:** Testing de servicios que funcionan
+
+### Prioridad baja
+- **Funcionalidades avanzadas:** Filtros más complejos, reportes detallados
+- **Deploy:** Containerización cuando todo funcione
+- **Monitoring:** Logs y métricas para producción
+
+**Enfoque:** Primero hacer funcionar lo básico, luego agregar mejoras.
 
 ---
 
@@ -171,6 +209,18 @@ El frontend ha sido estandarizado, con un panel de administración único, segur
 ## 📬 Contacto y soporte
 
 ®MasterBikes
+
+---
+
+## 📝 Nota sobre el proyecto
+
+ Hemos logrado implementar exitosamente 5 de 6 microservicios con funcionalidad completa, integración entre servicios y un frontend moderno. El auth-service presenta errores técnicos que estamos aprendiendo a resolver.
+
+**Lo que aprendimos:** Arquitectura de microservicios, comunicación entre servicios, Spring Boot, bases de datos relacionales, desarrollo frontend, trabajo en equipo.
+
+**Lo que nos falta:** Depuración de errores complejos, integración completa de seguridad, deployment en producción.
+
+Es un MVP honesto que muestra nuestro nivel actual de aprendizaje y las herramientas que hemos logrado dominar hasta ahora.
 
 ---
 
