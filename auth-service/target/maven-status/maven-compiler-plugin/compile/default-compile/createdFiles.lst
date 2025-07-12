@@ -1,5 +1,3 @@
-masterbikes/config/SecurityConfig.class
 masterbikes/Main.class
-masterbikes/config/CorsConfig.class
-masterbikes/config/CorsConfig$1.class
+masterbikes/config/SecurityConfig.class
 masterbikes/AuthServiceApplication.class
